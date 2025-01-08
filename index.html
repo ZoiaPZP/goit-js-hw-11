@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JS - Module 11</title>
-  <link rel="stylesheet" href="path-to-your-styles.css" />
   <script type="module" crossorigin src="/goit-js-hw-11/index.js"></script>
   <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-COPdusF7.js">
   <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-DztXd38E.css">
@@ -17,20 +16,9 @@
     <input class="input" type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
     <button type="submit" class="submit-btn">Search</button>
   </form>
-
-  <!-- Повідомлення про завантаження -->
-  <div id="loading-message" class="loading-message" style="display: none;">
-    Loading images, please wait...
-  </div>
-
-  <div class="gallery" style="display: none;"></div> <!-- Приховуємо галерею за замовчуванням -->
+  <div class="gallery"></div>
   <div class="button-container">
     <button type="button" class="load-more load-more-hidden">Load more</button>
   </div>
-
-  <!-- Індикатор завантаження -->
   <div id="loading-indicator" class="loader" style="display: none;"></div>
-
 </body>
-
-</html>
