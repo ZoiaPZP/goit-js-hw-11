@@ -15,7 +15,29 @@ export function clearGallery() {
 }
 
 export function renderMarkup(img) {
-  elem.galleryDiv.insertAdjacentHTML("beforeend", createMarkup(img));
+  const markup = createMarkup(img);
+
+  // Створення тимчасового контейнера для перевірки завантаження зображень
+  const tempContainer = document.createElement('div');
+  tempContainer.innerHTML = markup;
+
+  const images = tempContainer.querySelectorAll('img');
+  let loadedImages = 0;
+
+  // Слухачі для кожного зображення
+  images.forEach((image) => {
+    image.addEventListener('load', () => {
+      loadedImages += 1;
+      if (loadedImages === images.length) {
+        // Додавання розмітки тільки після завантаження всіх зображень
+        elem.galleryDiv.insertAdjacentHTML('beforeend', markup);
+      }
+    });
+
+    image.addEventListener('error', () => {
+      console.error(`Failed to load image: ${image.src}`);
+    });
+  });
 }
 
 export function createMarkup(img) {
