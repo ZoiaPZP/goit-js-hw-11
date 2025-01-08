@@ -33,7 +33,7 @@ export function createMarkup(img) {
         views,
         comments,
         downloads,
-      }) => `
+      }) => 
         <div class="photo-card">
           <a href="${largeImageURL}" class="gallery-image">
             <img src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -45,7 +45,7 @@ export function createMarkup(img) {
             <p class="info-item"><b>Downloads: ${downloads}</b></p>
           </div>
         </div>
-      `
+      
     )
     .join("");
 }

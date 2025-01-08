@@ -60,8 +60,9 @@ async function submit(evt) {
     totalHits > perPage ? showLoadMoreBtn() : hideLoadMoreBtn();
 
     Notiflix.Notify.success(`Success! Found ${totalHits} images.`);
-    renderMarkup(galleryItems.data.hits);
-    lightbox.refresh();
+renderMarkup(galleryItems.data.hits);
+lightbox.refresh();
+
   } catch (error) {
     Notiflix.Notify.failure("An error occurred. Please try again.");
   } finally {
@@ -93,7 +94,6 @@ async function onClickBtn() {
 
 if (elem?.form) elem.form.addEventListener("submit", submit);
 if (elem?.loadMoreBtn) elem.loadMoreBtn.addEventListener("click", onClickBtn);
-
 
 
 
