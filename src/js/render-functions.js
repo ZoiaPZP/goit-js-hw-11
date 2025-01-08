@@ -16,24 +16,31 @@ export function clearGallery() {
 
 export function renderMarkup(img) {
   const markup = createMarkup(img);
-  const tempContainer = document.createElement('div');
+
+  // Додаємо прихований контейнер для картинок
+  const tempContainer = document.createElement("div");
   tempContainer.innerHTML = markup;
+  tempContainer.classList.add("hidden"); // Приховуємо до повного завантаження
+  elem.galleryDiv.appendChild(tempContainer);
 
-  const images = Array.from(tempContainer.querySelectorAll('img'));
+  // Чекаємо, поки всі зображення завантажаться
+  const images = tempContainer.querySelectorAll("img");
+  let loadedCount = 0;
 
-  // Перевірка завантаження всіх зображень
-  const imageLoadPromises = images.map((image) => {
-    return new Promise((resolve, reject) => {
-      image.onload = () => resolve(image);
-      image.onerror = () => reject(`Failed to load image: ${image.src}`);
+  images.forEach((img) => {
+    img.addEventListener("load", () => {
+      loadedCount += 1;
+
+      // Коли всі зображення завантажаться, показуємо контейнер
+      if (loadedCount === images.length) {
+        tempContainer.classList.remove("hidden");
+      }
+    });
+
+    img.addEventListener("error", () => {
+      console.error("Error loading image:", img.src);
     });
   });
-
-  Promise.all(imageLoadPromises)
-    .then(() => {
-      elem.galleryDiv.insertAdjacentHTML('beforeend', markup);
-    })
-    .catch((error) => console.error(error));
 }
 
 export function createMarkup(img) {
@@ -63,4 +70,5 @@ export function createMarkup(img) {
     )
     .join("");
 }
+
 
