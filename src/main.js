@@ -13,8 +13,21 @@ let page = 1;
 const perPage = 40;
 
 const loadingIndicator = document.getElementById("loading-indicator");
+const loadingMessage = document.getElementById("loading-message");
+const gallery = document.querySelector(".gallery");
+
 const showLoadingSpinner = () => (loadingIndicator.style.display = "block");
 const hideLoadingSpinner = () => (loadingIndicator.style.display = "none");
+
+const showLoadingMessage = () => {
+  loadingMessage.style.display = "block"; // Показуємо повідомлення про завантаження
+  gallery.style.display = "none"; // Приховуємо галерею
+};
+
+const hideLoadingMessage = () => {
+  loadingMessage.style.display = "none"; // Приховуємо повідомлення про завантаження
+  gallery.style.display = "block"; // Показуємо галерею
+};
 
 const hideLoadMoreBtn = () => elem?.loadMoreBtn?.classList.add("load-more-hidden");
 const showLoadMoreBtn = () => elem?.loadMoreBtn?.classList.remove("load-more-hidden");
@@ -47,9 +60,7 @@ async function submit(evt) {
   page = 1;
   clearGallery();
   showLoadingSpinner();
-
-  // Показуємо повідомлення про завантаження
-  Notiflix.Notify.info("Loading images, please wait.");
+  showLoadingMessage(); // Показуємо повідомлення про завантаження
 
   try {
     const galleryItems = await service(text, page, perPage);
@@ -69,6 +80,7 @@ async function submit(evt) {
     Notiflix.Notify.failure("An error occurred. Please try again.");
   } finally {
     hideLoadingSpinner();
+    hideLoadingMessage(); // Приховуємо повідомлення після завантаження
   }
 }
 
@@ -76,9 +88,7 @@ async function onClickBtn() {
   page += 1;
   const text = elem.input.value.trim();
   showLoadingSpinner();
-
-  // Показуємо повідомлення про завантаження
-  Notiflix.Notify.info("Loading more images, please wait.");
+  showLoadingMessage(); // Показуємо повідомлення про завантаження
 
   try {
     const galleryItems = await service(text, page, perPage);
@@ -94,6 +104,7 @@ async function onClickBtn() {
     Notiflix.Notify.failure("An error occurred while loading more images.");
   } finally {
     hideLoadingSpinner();
+    hideLoadingMessage(); // Приховуємо повідомлення після завантаження
   }
 }
 
