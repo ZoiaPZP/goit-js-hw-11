@@ -94,3 +94,11 @@
   height: 50px;
   animation: spin 2s linear infinite;
 }
+.loading-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #710505;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
