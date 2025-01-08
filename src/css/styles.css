@@ -44,6 +44,12 @@
   flex-wrap: wrap;
   margin-top: 80px;
 }
+.gallery-item.hidden {
+  visibility: hidden;
+}
+.gallery-item {
+  visibility: visible;
+}
 
 .photo-card {
   max-width: 350px;

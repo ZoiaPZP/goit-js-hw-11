@@ -60,8 +60,7 @@ async function submit(evt) {
     totalHits > perPage ? showLoadMoreBtn() : hideLoadMoreBtn();
 
     Notiflix.Notify.success(`Success! Found ${totalHits} images.`);
-    renderMarkup(galleryItems.data.hits);
-    lightbox.refresh();
+    renderMarkup(galleryItems.data.hits, () => lightbox.refresh());
   } catch (error) {
     Notiflix.Notify.failure("An error occurred. Please try again.");
   } finally {
@@ -82,8 +81,7 @@ async function onClickBtn() {
       return;
     }
 
-    renderMarkup(galleryItems.data.hits);
-    lightbox.refresh();
+    renderMarkup(galleryItems.data.hits, () => lightbox.refresh());
   } catch (error) {
     Notiflix.Notify.failure("An error occurred while loading more images.");
   } finally {
