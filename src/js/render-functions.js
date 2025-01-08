@@ -5,22 +5,18 @@ export const elem = {
   input: document.querySelector('.search-form input[name="searchQuery"]'),
 };
 
-
-if (!elem.galleryDiv) console.error("Галерея не знайдена в DOM");
-if (!elem.loadMoreBtn) console.error("Кнопка 'Load More' не знайдена в DOM");
-if (!elem.form) console.error("Форма не знайдена в DOM");
-if (!elem.input) console.error("Поле введення не знайдено в DOM");
-
+if (!elem.galleryDiv) console.error("Gallery not found in DOM");
+if (!elem.loadMoreBtn) console.error("Load More button not found in DOM");
+if (!elem.form) console.error("Form not found in DOM");
+if (!elem.input) console.error("Input field not found in DOM");
 
 export function clearGallery() {
   elem.galleryDiv.innerHTML = "";
 }
 
-
 export function renderMarkup(img) {
   elem.galleryDiv.insertAdjacentHTML("beforeend", createMarkup(img));
 }
-
 
 export function createMarkup(img) {
   return img
@@ -33,7 +29,7 @@ export function createMarkup(img) {
         views,
         comments,
         downloads,
-      }) => 
+      }) => `
         <div class="photo-card">
           <a href="${largeImageURL}" class="gallery-image">
             <img src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -45,7 +41,8 @@ export function createMarkup(img) {
             <p class="info-item"><b>Downloads: ${downloads}</b></p>
           </div>
         </div>
-      
+      `
     )
     .join("");
 }
+
