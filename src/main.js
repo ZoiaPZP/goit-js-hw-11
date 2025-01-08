@@ -12,7 +12,7 @@ import { elem, renderMarkup, clearGallery } from "./js/render-functions.js";
 let page = 1;
 const perPage = 40;
 
-// Показ та приховування індикатора завантаження
+// Showing and hiding the loading indicator
 const loadingIndicator = document.getElementById("loading-indicator");
 const showLoadingSpinner = () => (loadingIndicator.style.display = "block");
 const hideLoadingSpinner = () => (loadingIndicator.style.display = "none");
@@ -41,7 +41,7 @@ async function submit(evt) {
   const text = elem.input.value.trim();
   if (!text) {
     hideLoadMoreBtn();
-    Notiflix.Notify.failure("Будь ласка, введіть запит для пошуку.");
+    Notiflix.Notify.failure("Please enter a search query.");
     return;
   }
 
@@ -52,18 +52,18 @@ async function submit(evt) {
   try {
     const galleryItems = await service(text, page, perPage);
     if (!galleryItems?.data?.hits?.length) {
-      iziToast.error({ title: "Помилка", message: "Зображення не знайдено." });
+      iziToast.error({ title: "Error", message: "No images found." });
       return;
     }
 
     const totalHits = galleryItems.data.totalHits;
     totalHits > perPage ? showLoadMoreBtn() : hideLoadMoreBtn();
 
-    Notiflix.Notify.success(`Ура! Знайдено ${totalHits} зображень.`);
+    Notiflix.Notify.success(`Success! Found ${totalHits} images.`);
     renderMarkup(galleryItems.data.hits);
     lightbox.refresh();
   } catch (error) {
-    Notiflix.Notify.failure("Сталася помилка. Спробуйте ще раз.");
+    Notiflix.Notify.failure("An error occurred. Please try again.");
   } finally {
     hideLoadingSpinner();
   }
@@ -78,14 +78,14 @@ async function onClickBtn() {
     const galleryItems = await service(text, page, perPage);
     if (!galleryItems?.data?.hits?.length) {
       hideLoadMoreBtn();
-      Notiflix.Notify.failure("Більше результатів немає.");
+      Notiflix.Notify.failure("No more results.");
       return;
     }
 
     renderMarkup(galleryItems.data.hits);
     lightbox.refresh();
   } catch (error) {
-    Notiflix.Notify.failure("Сталася помилка при завантаженні додаткових зображень.");
+    Notiflix.Notify.failure("An error occurred while loading more images.");
   } finally {
     hideLoadingSpinner();
   }
@@ -93,8 +93,6 @@ async function onClickBtn() {
 
 if (elem?.form) elem.form.addEventListener("submit", submit);
 if (elem?.loadMoreBtn) elem.loadMoreBtn.addEventListener("click", onClickBtn);
-
-
 
 
 
