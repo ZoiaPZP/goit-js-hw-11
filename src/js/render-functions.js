@@ -16,31 +16,17 @@ export function clearGallery() {
 
 export function renderMarkup(img) {
   const markup = createMarkup(img);
+  
+  // Додаємо елементи до галереї
+  elem.galleryDiv.innerHTML = markup;
 
-  // Додаємо прихований контейнер для картинок
-  const tempContainer = document.createElement("div");
-  tempContainer.innerHTML = markup;
-  tempContainer.classList.add("hidden"); // Приховуємо до повного завантаження
-  elem.galleryDiv.appendChild(tempContainer);
-
-  // Чекаємо, поки всі зображення завантажаться
-  const images = tempContainer.querySelectorAll("img");
-  let loadedCount = 0;
-
-  images.forEach((img) => {
-    img.addEventListener("load", () => {
-      loadedCount += 1;
-
-      // Коли всі зображення завантажаться, показуємо контейнер
-      if (loadedCount === images.length) {
-        tempContainer.classList.remove("hidden");
-      }
-    });
-
-    img.addEventListener("error", () => {
-      console.error("Error loading image:", img.src);
-    });
-  });
+  // Можна додати обробку, щоб перевірити, чи додаються картинки
+  const images = elem.galleryDiv.querySelectorAll("img");
+  if (images.length === 0) {
+    console.error("No images found in the markup!");
+  } else {
+    console.log("Images successfully added to the gallery!");
+  }
 }
 
 export function createMarkup(img) {
@@ -70,5 +56,6 @@ export function createMarkup(img) {
     )
     .join("");
 }
+
 
 
