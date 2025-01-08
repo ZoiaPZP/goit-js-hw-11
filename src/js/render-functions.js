@@ -49,4 +49,3 @@ export function createMarkup(img) {
     )
     .join("");
 }
-
