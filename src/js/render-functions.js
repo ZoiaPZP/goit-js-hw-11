@@ -1,5 +1,3 @@
-// render-functions.js
-
 export const elem = {
   galleryDiv: document.querySelector(".gallery"),
   loadMoreBtn: document.querySelector(".load-more"),

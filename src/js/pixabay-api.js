@@ -13,14 +13,14 @@ export async function service(query, page = 1, perPage = 40) {
     per_page: perPage,
   });
 
-  console.log("Запит до API:", `${BASE_URL}?${params}`); 
+  console.log("API request:", `${BASE_URL}?${params}`); 
 
   try {
     const response = await axios.get(`${BASE_URL}?${params}`);
-    console.log("Успішна відповідь від API:", response.data); 
+    console.log("Successful API response:", response.data); 
     return response;
   } catch (error) {
-    console.error("Помилка у запиті API:", error); 
+    console.error("API request error:", error); 
     throw error;
   }
 }
