@@ -16,28 +16,24 @@ export function clearGallery() {
 
 export function renderMarkup(img) {
   const markup = createMarkup(img);
-
-  // Створення тимчасового контейнера для перевірки завантаження зображень
   const tempContainer = document.createElement('div');
   tempContainer.innerHTML = markup;
 
-  const images = tempContainer.querySelectorAll('img');
-  let loadedImages = 0;
+  const images = Array.from(tempContainer.querySelectorAll('img'));
 
-  // Слухачі для кожного зображення
-  images.forEach((image) => {
-    image.addEventListener('load', () => {
-      loadedImages += 1;
-      if (loadedImages === images.length) {
-        // Додавання розмітки тільки після завантаження всіх зображень
-        elem.galleryDiv.insertAdjacentHTML('beforeend', markup);
-      }
-    });
-
-    image.addEventListener('error', () => {
-      console.error(`Failed to load image: ${image.src}`);
+  // Перевірка завантаження всіх зображень
+  const imageLoadPromises = images.map((image) => {
+    return new Promise((resolve, reject) => {
+      image.onload = () => resolve(image);
+      image.onerror = () => reject(`Failed to load image: ${image.src}`);
     });
   });
+
+  Promise.all(imageLoadPromises)
+    .then(() => {
+      elem.galleryDiv.insertAdjacentHTML('beforeend', markup);
+    })
+    .catch((error) => console.error(error));
 }
 
 export function createMarkup(img) {
