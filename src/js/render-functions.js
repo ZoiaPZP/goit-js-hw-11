@@ -1,3 +1,5 @@
+// render-functions.js
+
 export const elem = {
   galleryDiv: document.querySelector(".gallery"),
   loadMoreBtn: document.querySelector(".load-more"),
@@ -29,7 +31,8 @@ export function createMarkup(img) {
         views,
         comments,
         downloads,
-      }) => 
+      }) => {
+        return `
         <div class="photo-card">
           <a href="${largeImageURL}" class="gallery-image">
             <img src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -41,8 +44,10 @@ export function createMarkup(img) {
             <p class="info-item"><b>Downloads: ${downloads}</b></p>
           </div>
         </div>
-      
+        `;
+      }
     )
     .join("");
 }
+
 
