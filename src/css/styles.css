@@ -78,6 +78,9 @@
   color: #710505;
   background-color: rgb(255, 210, 160);
 }
+.load-more-hidden {
+  display: none; /* Кнопка прихована за замовчуванням */
+}
 
 .loader {
   position: fixed;
