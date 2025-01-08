@@ -15,25 +15,7 @@ export function clearGallery() {
 }
 
 export function renderMarkup(img) {
-  const markup = createMarkup(img);
-  const tempContainer = document.createElement('div');
-  tempContainer.innerHTML = markup;
-
-  const images = Array.from(tempContainer.querySelectorAll('img'));
-
-  // Перевірка завантаження всіх зображень
-  const imageLoadPromises = images.map((image) => {
-    return new Promise((resolve, reject) => {
-      image.onload = () => resolve(image);
-      image.onerror = () => reject(`Failed to load image: ${image.src}`);
-    });
-  });
-
-  Promise.all(imageLoadPromises)
-    .then(() => {
-      elem.galleryDiv.insertAdjacentHTML('beforeend', markup);
-    })
-    .catch((error) => console.error(error));
+  elem.galleryDiv.insertAdjacentHTML("beforeend", createMarkup(img));
 }
 
 export function createMarkup(img) {
@@ -47,7 +29,7 @@ export function createMarkup(img) {
         views,
         comments,
         downloads,
-      }) => `
+      }) => 
         <div class="photo-card">
           <a href="${largeImageURL}" class="gallery-image">
             <img src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -59,7 +41,7 @@ export function createMarkup(img) {
             <p class="info-item"><b>Downloads: ${downloads}</b></p>
           </div>
         </div>
-      `
+      
     )
     .join("");
 }
