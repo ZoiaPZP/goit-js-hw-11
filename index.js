@@ -1,27 +1,14 @@
-import{a as b,S as N,N as e}from"./assets/vendor-DKgH0KKA.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))i(t);new MutationObserver(t=>{for(const r of t)if(r.type==="childList")for(const s of r.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&i(s)}).observe(document,{childList:!0,subtree:!0});function a(t){const r={};return t.integrity&&(r.integrity=t.integrity),t.referrerPolicy&&(r.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?r.credentials="include":t.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function i(t){if(t.ep)return;t.ep=!0;const r=a(t);fetch(t.href,r)}})();async function m(n,o=1,a=40){const i="https://pixabay.com/api/",t="48018775-66f870a0a55ddc658d7ca6c06",r=new URLSearchParams({key:t,q:n,image_type:"photo",orientation:"horizontal",safesearch:!0,page:o,per_page:a});try{return await b.get(`${i}?${r}`)}catch(s){console.log(s)}}const l={galleryDiv:document.querySelector(".gallery"),loadMoreBtn:document.querySelector(".load-more"),form:document.querySelector(".search-form"),input:document.querySelector(".input"),submitBtn:document.querySelector(".submit-btn")};function p(n){l.galleryDiv.insertAdjacentHTML("beforeend",S(n))}function S(n){return n.map(({webformatURL:o,largeImageURL:a,tags:i,likes:t,views:r,comments:s,downloads:h})=>`
-    <div class="photo-card">
-      <a href="${a}">
-        <img
-          class="gallery-image img"
-          src="${o}"
-          alt="${i}"
-          loading="lazy"
-        />
-      </a>
-      <div class="info">
-        <p class="info-item">
-          <b>Likes: ${t}</b>
-        </p>
-        <p class="info-item">
-          <b>Views: ${r}</b>
-        </p>
-        <p class="info-item">
-          <b>Comments: ${s}</b>
-        </p>
-        <p class="info-item">
-          <b>Downloads: ${h}</b>
-        </p>
-      </div>
-    </div>
-    `).join("")}let c=1;const f=40,g=document.getElementById("loading-spinner"),v=()=>{g.style.display="block"},L=()=>{g.style.display="none"},u=()=>l.loadMoreBtn.style.display="none",P=()=>l.loadMoreBtn.style.display="block";u();const y=new N(".gallery a",{captionsData:"alt",captionPosition:"bottom",captionDelay:200});async function w(n){n.preventDefault();let o=l.form.elements.searchQuery.value.trim();if(c=1,d(),o===""){u(),e&&e.Notify&&e.Notify.failure("Sorry, there are no images matching your search query. Please try again.");return}v();try{const a=await m(o,c,f);let i=a.data.totalHits;a.data.hits.length===0?(d(),e&&e.Notify&&e.Notify.failure("Sorry, there are no images matching your search query. Please try again.")):i>=1&&i<f?(u(),e&&e.Notify&&e.Notify.success(`Hooray! We found ${i} image.`)):i>f&&(P(),e&&e.Notify&&e.Notify.success(`Hooray! We found ${i} image.`)),p(a.data.hits),y.refresh()}catch(a){console.log(a),e&&e.Notify&&e.Notify.failure("Sorry, there are no images matching your search query. Please try again.")}L(),y.refresh()}async function q(){c+=1;let n=l.form.elements.searchQuery.value;try{const o=await m(n,c,f);o.data.totalHits/f<=c&&(u(),e&&e.Notify&&e.Notify.failure("We're sorry, but you've reached the end of search results.")),p(o.data.hits)}catch{e&&e.Notify&&e.Notify.failure("Sorry, there are no images matching your search query. Please try again.")}y.refresh()}function d(){l.galleryDiv.innerHTML="",c=1,u()}l.form.addEventListener("submit",w);l.loadMoreBtn.addEventListener("click",q);
+import{a as b,S as M,N as c,i as v}from"./assets/vendor-COPdusF7.js";(function(){const n=document.createElement("link").relList;if(n&&n.supports&&n.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const o of e)if(o.type==="childList")for(const s of o.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&i(s)}).observe(document,{childList:!0,subtree:!0});function a(e){const o={};return e.integrity&&(o.integrity=e.integrity),e.referrerPolicy&&(o.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?o.credentials="include":e.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function i(e){if(e.ep)return;e.ep=!0;const o=a(e);fetch(e.href,o)}})();async function u(r,n=1,a=40){const i="https://pixabay.com/api/",e="48018775-66f870a0a55ddc658d7ca6c06",o=new URLSearchParams({key:e,q:r,image_type:"photo",orientation:"horizontal",safesearch:!0,page:n,per_page:a});console.log("Запит до API:",`${i}?${o}`);try{const s=await b.get(`${i}?${o}`);return console.log("Успішна відповідь від API:",s.data),s}catch(s){throw console.error("Помилка у запиті API:",s),s}}const t={galleryDiv:document.querySelector(".gallery"),loadMoreBtn:document.querySelector(".load-more"),form:document.querySelector(".search-form"),input:document.querySelector('.search-form input[name="searchQuery"]')};t.galleryDiv||console.error("Галерея не знайдена в DOM");t.loadMoreBtn||console.error("Кнопка 'Load More' не знайдена в DOM");t.form||console.error("Форма не знайдена в DOM");t.input||console.error("Поле введення не знайдено в DOM");function D(){t.galleryDiv.innerHTML=""}function p(r){t.galleryDiv.insertAdjacentHTML("beforeend",$(r))}function $(r){return r.map(({webformatURL:n,largeImageURL:a,tags:i,likes:e,views:o,comments:s,downloads:L})=>`
+        <div class="photo-card">
+          <a href="${a}" class="gallery-image">
+            <img src="${n}" alt="${i}" loading="lazy" />
+          </a>
+          <div class="info">
+            <p class="info-item"><b>Likes: ${e}</b></p>
+            <p class="info-item"><b>Views: ${o}</b></p>
+            <p class="info-item"><b>Comments: ${s}</b></p>
+            <p class="info-item"><b>Downloads: ${L}</b></p>
+          </div>
+        </div>
+      `).join("")}let l=1;const f=40,m=document.getElementById("loading-indicator"),y=()=>m.style.display="block",h=()=>m.style.display="none",d=()=>{var r;return(r=t==null?void 0:t.loadMoreBtn)==null?void 0:r.classList.add("load-more-hidden")},w=()=>{var r;return(r=t==null?void 0:t.loadMoreBtn)==null?void 0:r.classList.remove("load-more-hidden")};d();const g=new M(".gallery a",{captionsData:"alt",captionPosition:"bottom",captionDelay:200});document.addEventListener("DOMContentLoaded",()=>{c.Notify.init({position:"right-bottom",clickToClose:!0,timeout:3e3})});async function B(r){var a,i;r.preventDefault();const n=t.input.value.trim();if(!n){d(),c.Notify.failure("Будь ласка, введіть запит для пошуку.");return}l=1,D(),y();try{const e=await u(n,l,f);if(!((i=(a=e==null?void 0:e.data)==null?void 0:a.hits)!=null&&i.length)){v.error({title:"Помилка",message:"Зображення не знайдено."});return}const o=e.data.totalHits;o>f?w():d(),c.Notify.success(`Ура! Знайдено ${o} зображень.`),p(e.data.hits),g.refresh()}catch{c.Notify.failure("Сталася помилка. Спробуйте ще раз.")}finally{h()}}async function N(){var n,a;l+=1;const r=t.input.value.trim();y();try{const i=await u(r,l,f);if(!((a=(n=i==null?void 0:i.data)==null?void 0:n.hits)!=null&&a.length)){d(),c.Notify.failure("Більше результатів немає.");return}p(i.data.hits),g.refresh()}catch{c.Notify.failure("Сталася помилка при завантаженні додаткових зображень.")}finally{h()}}t!=null&&t.form&&t.form.addEventListener("submit",B);t!=null&&t.loadMoreBtn&&t.loadMoreBtn.addEventListener("click",N);
 //# sourceMappingURL=index.js.map
