@@ -25,7 +25,7 @@ const showLoadingMessage = () => {
 };
 
 const hideLoadingMessage = () => {
-  loadingMessage.style.display = "none"; // Приховуємо повідомлення про завантаження
+  loadingMessage.style.display = "none"; // Приховуємо повідомлення
   gallery.style.display = "block"; // Показуємо галерею
 };
 
