@@ -27,5 +27,3 @@ export async function service(query, page = 1, perPage = 40) {
 
 
 
-
-

@@ -1,12 +1,10 @@
 export const elem = {
   galleryDiv: document.querySelector(".gallery"),
-  loadMoreBtn: document.querySelector(".load-more"),
   form: document.querySelector(".search-form"),
   input: document.querySelector('.search-form input[name="searchQuery"]'),
 };
 
 if (!elem.galleryDiv) console.error("Gallery not found in DOM");
-if (!elem.loadMoreBtn) console.error("Load More button not found in DOM");
 if (!elem.form) console.error("Form not found in DOM");
 if (!elem.input) console.error("Input field not found in DOM");
 
@@ -47,5 +45,7 @@ export function createMarkup(img) {
     )
     .join("");
 }
+
+
 
 
